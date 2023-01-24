@@ -19,13 +19,16 @@ export class AuthService {
 
   async createUser(userObject: RegisterAuthDto) {
     const { password, email } = userObject;
-    console.log(userObject);
     const plainPass = await hash(password, 10);
-    const usuarioEncriptado = { ...userObject, password: plainPass };
 
-    const findUser = await this.usersRepository.findBy({ email: email });
+    const usuarioEncriptado = { ...userObject, password: plainPass };
+    console.log(usuarioEncriptado);
+
+    const findUser = await this.usersRepository.findOneBy({ email });
+
     if (!findUser) {
-      await this.usersRepository.create(usuarioEncriptado);
+      const user = await this.usersRepository.save(usuarioEncriptado);
+
       throw new HttpException(
         {
           status: HttpStatus.OK,
