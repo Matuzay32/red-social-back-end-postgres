@@ -19,6 +19,7 @@ export class AuthService {
 
   async createUser(userObject: RegisterAuthDto) {
     const { password, email } = userObject;
+    console.log(userObject);
     const plainPass = await hash(password, 10);
     const usuarioEncriptado = { ...userObject, password: plainPass };
 
