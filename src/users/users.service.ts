@@ -84,9 +84,32 @@ export class UsersService {
     }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<any> {
     try {
-      return `This action updates a #${id} user`;
-    } catch (error) {}
+      const user = await this.repositoryUsers.findOne({
+        where: { user_id: id },
+      });
+      if (!user) {
+        throw new HttpException(
+          {
+            message: `El usuario con #ID${id} no se encuentra en la base de datos`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      const updatedUser = Object.assign(user, updateUserDto);
+      await this.repositoryUsers.save(updatedUser);
+      return {
+        message: `El usuario con #ID ${id} ha sido actualizado`,
+        user: updatedUser,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: `Ocurrió un error al intentar actualizar el usuario con #ID ${id}`,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
