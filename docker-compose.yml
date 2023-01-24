@@ -12,7 +12,6 @@ services:
   db:
     image: postgres # Utiliza la imagen oficial de Postgres.
     environment:
-      - DATABASE_HOST=127.0.0.1
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
     ports:
