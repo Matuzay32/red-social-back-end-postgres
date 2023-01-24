@@ -13,7 +13,7 @@ export class UsersService {
 
   async findAll(): Promise<any> {
     try {
-      const users = await this.repositoryUsers.find();
+      const users = await this.repositoryUsers.find({});
 
       if (!users.length) {
         throw new HttpException(
