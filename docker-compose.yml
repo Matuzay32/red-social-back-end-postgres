@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build: . # Utiliza el Dockerfile en el directorio actual para construir el servicio.
+    ports:
+      - '3000:3000' # Expone el puerto 3000 en la máquina host y lo mapea al puerto 3000 en el contenedor.
+    depends_on:
+      - db # Especifica que el servicio "app" depende del servicio "db".
+    restart: always # Asegura que el servicio siempre se reinicie si se detiene.
+    volumes:
+      - .:/myApp # esto mapea el directorio actual en la maquina host al directorio /myApp en el contenedor
+  db:
+    image: postgres # Utiliza la imagen oficial de Postgres.
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432' # Expone el puerto 5432 en la máquina host y lo mapea al puerto 5432 en el contenedor.
+    restart: always # Asegura que el servicio siempre se reinicie si se detiene.
+

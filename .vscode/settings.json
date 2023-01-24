@@ -1,0 +1,9 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#183405",
+    "titleBar.activeBackground": "#214907",
+    "titleBar.activeForeground": "#F3FDEC"
+  },
+  "explorer.confirmUndo": "default",
+  "explorer.autoReveal": true
+}
