@@ -22,7 +22,6 @@ export class AuthService {
     const plainPass = await hash(password, 10);
 
     const usuarioEncriptado = { ...userObject, password: plainPass };
-    console.log(usuarioEncriptado);
 
     const findUser = await this.usersRepository.findOneBy({ email });
 
@@ -47,34 +46,34 @@ export class AuthService {
     }
   }
 
-  // async login(userObject: LoginAuthDto) {
-  //   const { email, password } = userObject;
-  //   const findUser = await this.usersRepository.findBy({ email: email });
+  async login(userObject: LoginAuthDto) {
+    const { email, password } = userObject;
+    const findUser = await this.usersRepository.findOne({ where: { email } });
 
-  //   if (!findUser) {
-  //     throw new HttpException('USER_NOT_FOUND', HttpStatus.NOT_FOUND);
-  //   }
-  //   const checkPass = await compare(password, findUser.password);
+    if (!findUser) {
+      throw new HttpException('USER_NOT_FOUND', HttpStatus.NOT_FOUND);
+    }
+    const checkPass = await compare(password, findUser.password);
 
-  //   if (!checkPass) {
-  //     throw new HttpException('PASSWORD_INCORRECT', HttpStatus.FORBIDDEN);
-  //   }
+    if (!checkPass) {
+      throw new HttpException('PASSWORD_INCORRECT', HttpStatus.FORBIDDEN);
+    }
 
-  //   const payload = {
-  //     id: findUser.id,
-  //     username: findUser.username,
-  //     email: findUser.email,
-  //   };
+    const payload = {
+      user_id: findUser.user_id,
+      username: findUser.username,
+      email: findUser.email,
+    };
 
-  //   const token = await this.jwtServie.sign(payload);
+    const token = await this.jwtServie.sign(payload);
 
-  //   const data = {
-  //     token,
-  //   };
+    const data = {
+      token,
+    };
 
-  //   return {
-  //     statusCode: HttpStatus.OK,
-  //     data: data,
-  //   };
-  // }
+    return {
+      statusCode: HttpStatus.OK,
+      data: data,
+    };
+  }
 }
