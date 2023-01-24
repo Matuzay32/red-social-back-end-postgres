@@ -8,8 +8,7 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { CreateUserInterface } from '../users/interface/create.user.interface';
-import LoginResponse from '../../dist/auth/auth.interface.d';
-
+import LoginResponse from '../auth/auth.interface';
 @Injectable()
 export class AuthService {
   constructor(

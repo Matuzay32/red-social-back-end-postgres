@@ -35,15 +35,58 @@ export class UsersService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number): Promise<any> {
+    try {
+      const user = await this.repositoryUsers.findOne({
+        where: { user_id: id },
+      });
+      if (!user) {
+        throw new HttpException(
+          {
+            message: `No se encontró el usuario con #ID  ${id}  en nuestra base de datos`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      return user;
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: `No se encontró el usuario con #ID${id} en nuestra base de datos`,
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  }
+
+  async remove(id: number): Promise<any> {
+    try {
+      const user = await this.repositoryUsers.findOne({
+        where: { user_id: id },
+      });
+      if (!user) {
+        return {
+          message: `El usuario con #ID ${id} no se encuentra en la base de datos`,
+          status: HttpStatus.CONFLICT,
+        };
+      }
+      await this.repositoryUsers.remove(user);
+      return {
+        message: `El usuario con #ID$ ${id} ha sido eliminado`,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: `Ocurrió un error al intentar eliminar el usuario con #ID ${id}`,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+    try {
+      return `This action updates a #${id} user`;
+    } catch (error) {}
   }
 }
