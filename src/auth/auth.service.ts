@@ -7,6 +7,8 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { CreateUserInterface } from '../users/interface/create.user.interface';
+import LoginResponse from '../../dist/auth/auth.interface.d';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +19,7 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async createUser(userObject: RegisterAuthDto) {
+  async createUser(userObject: RegisterAuthDto): Promise<CreateUserInterface> {
     const { password, email } = userObject;
     const plainPass = await hash(password, 10);
 
@@ -46,7 +48,7 @@ export class AuthService {
     }
   }
 
-  async login(userObject: LoginAuthDto) {
+  async login(userObject: LoginAuthDto): Promise<LoginResponse> {
     const { email, password } = userObject;
     const findUser = await this.usersRepository.findOne({ where: { email } });
 
