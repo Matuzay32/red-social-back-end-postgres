@@ -16,4 +16,7 @@ export class User {
 
   @Column({ default: false })
   isActive: boolean;
+
+  @Column({ default: false })
+  isAdmin: boolean;
 }
