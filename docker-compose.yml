@@ -15,6 +15,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
     ports:
-      - '5432:5432' # Expone el puerto 5432 en la máquina host y lo mapea al puerto 5432 en el contenedor.
+      - '5433:5432' # Expone el puerto 5432 en la máquina host y lo mapea al puerto 5432 en el contenedor.
     restart: always # Asegura que el servicio siempre se reinicie si se detiene.
 

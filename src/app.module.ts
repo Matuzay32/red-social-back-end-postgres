@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
 import { CountriesModule } from './countries/countries.module';
+import { Country } from './countries/entities/country.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { CountriesModule } from './countries/countries.module';
       username: 'postgres',
       password: 'password',
       database: 'postgres',
-      entities: [User],
+      entities: [User, Country],
       synchronize: true,
     }),
     CountriesModule,
