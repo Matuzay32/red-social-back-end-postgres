@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
 import { CountriesModule } from './countries/countries.module';
 import { Country } from './countries/entities/country.entity';
+import { GenderModule } from './gender/gender.module';
+import { Gender } from './gender/entities/gender.entity';
 
 @Module({
   imports: [
@@ -21,10 +23,11 @@ import { Country } from './countries/entities/country.entity';
       username: 'postgres',
       password: 'password',
       database: 'postgres',
-      entities: [User, Country],
+      entities: [User, Country, Gender],
       synchronize: true,
     }),
     CountriesModule,
+    GenderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
