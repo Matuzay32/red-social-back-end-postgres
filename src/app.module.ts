@@ -11,6 +11,7 @@ import { Country } from './countries/entities/country.entity';
 import { GenderModule } from './gender/gender.module';
 import { Gender } from './gender/entities/gender.entity';
 import { SentimentalModule } from './sentimental/sentimental.module';
+import { Sentimental } from './sentimental/entities/sentimental.entity';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { SentimentalModule } from './sentimental/sentimental.module';
       username: 'postgres',
       password: 'password',
       database: 'postgres',
-      entities: [User, Country, Gender],
+      entities: [User, Country, Gender, Sentimental],
       synchronize: true,
     }),
     CountriesModule,
