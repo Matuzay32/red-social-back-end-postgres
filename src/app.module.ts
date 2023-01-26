@@ -10,6 +10,7 @@ import { CountriesModule } from './countries/countries.module';
 import { Country } from './countries/entities/country.entity';
 import { GenderModule } from './gender/gender.module';
 import { Gender } from './gender/entities/gender.entity';
+import { SentimentalModule } from './sentimental/sentimental.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Gender } from './gender/entities/gender.entity';
     }),
     CountriesModule,
     GenderModule,
+    SentimentalModule,
   ],
   controllers: [AppController],
   providers: [AppService],
