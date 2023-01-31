@@ -13,7 +13,8 @@ import { Gender } from './gender/entities/gender.entity';
 import { SentimentalModule } from './sentimental/sentimental.module';
 import { Sentimental } from './sentimental/entities/sentimental.entity';
 import { TypeAcountModule } from './type-acount/type-acount.module';
-
+import { TypeAcount } from './type-acount/entities/type-acount.entity';
+import { FriendModule } from './friend/friend.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: false, isGlobal: true }),
@@ -26,13 +27,14 @@ import { TypeAcountModule } from './type-acount/type-acount.module';
       username: 'postgres',
       password: 'password',
       database: 'postgres',
-      entities: [User, Country, Gender, Sentimental, TypeAcountModule],
+      entities: [User, Country, Gender, Sentimental, TypeAcount],
       synchronize: true,
     }),
     CountriesModule,
     GenderModule,
     SentimentalModule,
     TypeAcountModule,
+    FriendModule,
   ],
   controllers: [AppController],
   providers: [AppService],

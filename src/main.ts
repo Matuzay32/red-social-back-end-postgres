@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription('Esta api simula una red social ')
     .setVersion('1.0')
 
+    .addTag('friend')
     .addTag('typeAcount')
     .addTag('sentimental')
     .addTag('gender')
