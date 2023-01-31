@@ -12,6 +12,7 @@ import { GenderModule } from './gender/gender.module';
 import { Gender } from './gender/entities/gender.entity';
 import { SentimentalModule } from './sentimental/sentimental.module';
 import { Sentimental } from './sentimental/entities/sentimental.entity';
+import { TypeAcountModule } from './type-acount/type-acount.module';
 
 @Module({
   imports: [
@@ -25,12 +26,13 @@ import { Sentimental } from './sentimental/entities/sentimental.entity';
       username: 'postgres',
       password: 'password',
       database: 'postgres',
-      entities: [User, Country, Gender, Sentimental],
+      entities: [User, Country, Gender, Sentimental, TypeAcountModule],
       synchronize: true,
     }),
     CountriesModule,
     GenderModule,
     SentimentalModule,
+    TypeAcountModule,
   ],
   controllers: [AppController],
   providers: [AppService],
