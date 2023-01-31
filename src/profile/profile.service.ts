@@ -67,7 +67,7 @@ export class ProfileService {
   async findOne(id: number): Promise<any> {
     try {
       const profile = await this.repositryProfile.findOne({
-        where: { gander_id: id },
+        where: { profile_id: id },
       });
       if (!profile) {
         throw new HttpException(
@@ -91,7 +91,7 @@ export class ProfileService {
   async update(id: number, updateProfileDto: UpdateProfileDto): Promise<any> {
     try {
       const profile = await this.repositryProfile.findOne({
-        where: { gander_id: id },
+        where: { profile_id: id },
       });
       if (!profile) {
         throw new HttpException(
@@ -120,7 +120,7 @@ export class ProfileService {
   async remove(id: number): Promise<any> {
     try {
       const profile = await this.repositryProfile.findOne({
-        where: { gander_id: id },
+        where: { profile_id: id },
       });
       if (!profile) {
         return {
