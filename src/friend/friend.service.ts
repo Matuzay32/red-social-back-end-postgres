@@ -18,7 +18,7 @@ export class FriendService {
       });
       if (found) {
         return {
-          message: `El pais ${name} ya se encuentra en la DB`,
+          message: `El friend ${name} ya se encuentra en la DB`,
           status: HttpStatus.UNPROCESSABLE_ENTITY,
           data: found,
         };
@@ -26,13 +26,13 @@ export class FriendService {
 
       await this.repositoryFriend.save(createFriendDto);
       return {
-        message: `El pais ${name} fue creado exitosamente`,
+        message: `El friend ${name} fue creado exitosamente`,
         status: HttpStatus.CREATED,
       };
     } catch (error) {
       throw new HttpException(
         {
-          message: `Ocurrió un error al intentar crear el pais con # ${name}`,
+          message: `Ocurrió un error al intentar crear el friend con # ${name}`,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
@@ -46,7 +46,7 @@ export class FriendService {
       if (!countries.length) {
         throw new HttpException(
           {
-            message: 'No hay paises en la base de datos',
+            message: 'No hay friendes en la base de datos',
           },
           HttpStatus.NO_CONTENT,
         );
@@ -56,7 +56,7 @@ export class FriendService {
     } catch (error) {
       throw new HttpException(
         {
-          message: 'Hubo un error al intentar encontrar los paises',
+          message: 'Hubo un error al intentar encontrar los friendes',
         },
         HttpStatus.BAD_REQUEST,
       );
@@ -65,51 +65,51 @@ export class FriendService {
 
   async findOne(id: number): Promise<any> {
     try {
-      const country = await this.repositoryFriend.findOne({
+      const friend = await this.repositoryFriend.findOne({
         where: { friend_id: id },
       });
-      if (!country) {
+      if (!friend) {
         throw new HttpException(
           {
-            message: `No se encontró el pais con #ID  ${id}  en nuestra base de datos`,
+            message: `No se encontró el friend con #ID  ${id}  en nuestra base de datos`,
           },
           HttpStatus.NOT_FOUND,
         );
       }
-      return country;
+      return friend;
     } catch (error) {
       throw new HttpException(
         {
-          message: `No se encontró el pais con #ID ${id} en nuestra base de datos`,
+          message: `No se encontró el friend con #ID ${id} en nuestra base de datos`,
         },
         HttpStatus.NOT_FOUND,
       );
     }
   }
 
-  async update(id: number, UpdateFriendDto: UpdateFriendDto): Promise<any> {
+  async update(id: number, updateFriendDto: UpdateFriendDto): Promise<any> {
     try {
-      const country = await this.repositoryFriend.findOne({
+      const friend = await this.repositoryFriend.findOne({
         where: { friend_id: id },
       });
-      if (!country) {
+      if (!friend) {
         throw new HttpException(
           {
-            message: `El pais con #ID ${id} no se encuentra en la base de datos`,
+            message: `El friend con #ID ${id} no se encuentra en la base de datos`,
           },
           HttpStatus.NOT_FOUND,
         );
       }
-      const updatedUser = Object.assign(country, UpdateFriendDto);
+      const updatedUser = Object.assign(friend, updateFriendDto);
       await this.repositoryFriend.save(updatedUser);
       return {
-        message: `El pais con #ID ${id} ha sido actualizado`,
+        message: `El friend con #ID ${id} ha sido actualizado`,
         user: updatedUser,
       };
     } catch (error) {
       throw new HttpException(
         {
-          message: `Ocurrió un error al intentar actualizar el pais con #ID ${id}`,
+          message: `Ocurrió un error al intentar actualizar el friend con #ID ${id}`,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
@@ -118,24 +118,24 @@ export class FriendService {
 
   async remove(id: number): Promise<any> {
     try {
-      const country = await this.repositoryFriend.findOne({
+      const friend = await this.repositoryFriend.findOne({
         where: { friend_id: id },
       });
-      if (!country) {
+      if (!friend) {
         return {
-          message: `El pais con #ID ${id} no se encuentra en la base de datos`,
+          message: `El friend con #ID ${id} no se encuentra en la base de datos`,
           status: HttpStatus.CONFLICT,
         };
       }
-      await this.repositoryFriend.remove(country);
+      await this.repositoryFriend.remove(friend);
       return {
-        message: `El pais con #ID ${id} ha sido eliminado`,
+        message: `El friend con #ID ${id} ha sido eliminado`,
         status: HttpStatus.NO_CONTENT,
       };
     } catch (error) {
       throw new HttpException(
         {
-          message: `Ocurrió un error al intentar eliminar el pais con #ID ${id}`,
+          message: `Ocurrió un error al intentar eliminar el friend con #ID ${id}`,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
