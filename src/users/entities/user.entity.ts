@@ -14,6 +14,12 @@ export class User {
   @Column()
   email: string;
 
+  @Column()
+  lastName: string;
+
+  @Column()
+  name: string;
+
   @Column({ default: false })
   isActive: boolean;
 

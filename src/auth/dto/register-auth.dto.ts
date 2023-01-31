@@ -1,6 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
+  IsAlpha,
   IsDate,
   IsEmail,
   IsNotEmpty,
@@ -15,4 +16,14 @@ export class RegisterAuthDto extends PartialType(LoginAuthDto) {
   @MinLength(4)
   @ApiProperty()
   username: string;
+
+  @IsAlpha()
+  @IsNotEmpty()
+  @ApiProperty()
+  lastName: string;
+
+  @IsAlpha()
+  @IsNotEmpty()
+  @ApiProperty()
+  name: string;
 }
