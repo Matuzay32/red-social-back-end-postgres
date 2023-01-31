@@ -39,7 +39,7 @@ import { Profile } from './profile/entities/profile.entity';
         Friend,
         Profile,
       ],
-      synchronize: true,
+      synchronize: false,
     }),
     CountriesModule,
     GenderModule,
