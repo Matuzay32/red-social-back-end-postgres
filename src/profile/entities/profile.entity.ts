@@ -17,7 +17,19 @@ export class Profile {
   profile_id: number;
 
   @Column()
-  name: string;
+  country_id: number;
+
+  @Column()
+  gender_id: number;
+
+  @Column()
+  user_id: number;
+
+  @Column()
+  sentimental_id: number;
+
+  @Column()
+  typeAcount_id: number;
 
   // @ManyToOne((type) => Country)
   // @JoinColumn({ name: 'country_id' })
