@@ -13,5 +13,5 @@ export class CreateProfileDto {
   sentimental_id: number;
 
   @ApiProperty()
-  TypeAcount_id: number;
+  typeAcount_id: number;
 }

@@ -31,23 +31,23 @@ export class Profile {
   @Column()
   typeAcount_id: number;
 
-  // @ManyToOne((type) => Country)
-  // @JoinColumn({ name: 'country_id' })
-  // country: Country;
+  @ManyToOne((type) => Country)
+  @JoinColumn({ name: 'country_id' })
+  country: Country;
 
-  // @ManyToOne((type) => Gender)
-  // @JoinColumn({ name: 'gender_id' })
-  // gender: Gender;
+  @ManyToOne((type) => Gender)
+  @JoinColumn({ name: 'gender_id' })
+  gender: Gender;
 
-  // @ManyToOne((type) => User)
-  // @JoinColumn({ name: 'user_id' })
-  // user: User;
+  @ManyToOne((type) => Sentimental)
+  @JoinColumn({ name: 'sentimental_id' })
+  sentimental: Sentimental;
 
-  // @ManyToOne((type) => Sentimental)
-  // @JoinColumn({ name: 'sentimental_id' })
-  // sentimental: Sentimental;
+  @ManyToOne((type) => TypeAcount)
+  @JoinColumn({ name: 'typeAcount_id' })
+  typeAcount: TypeAcount;
 
-  // @ManyToOne((type) => TypeAcount)
-  // @JoinColumn({ name: 'TypeAcount_id' })
-  // typeAcount: TypeAcount;
+  @ManyToOne((type) => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }

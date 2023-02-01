@@ -40,11 +40,22 @@ export class ProfileService {
     }
   }
 
-  async findAll(): Promise<any> {
+  async findAll(): Promise<Profile[]> {
     try {
-      const countries = await this.repositryProfile.find({});
+      const profiles = await this.repositryProfile.find({
+        join: {
+          alias: 'profile',
+          innerJoinAndSelect: {
+            country: 'profile.country',
+            gender: 'profile.gender',
+            sentimental: 'profile.sentimental',
+            typeAcount: 'profile.typeAcount',
+            user: 'profile.user',
+          },
+        },
+      });
 
-      if (!countries.length) {
+      if (!profiles.length) {
         throw new HttpException(
           {
             message: 'No hay profiles en la base de datos',
@@ -53,7 +64,7 @@ export class ProfileService {
         );
       }
 
-      return countries;
+      return profiles;
     } catch (error) {
       throw new HttpException(
         {
