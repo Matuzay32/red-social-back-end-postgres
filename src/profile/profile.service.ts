@@ -9,22 +9,13 @@ import { Profile } from './entities/profile.entity';
 @Injectable()
 export class ProfileService {
   constructor(
-    @InjectRepository(Profile) private repositryProfile: Repository<Profile>,
+    @InjectRepository(Profile) private repositoryProfile: Repository<Profile>,
   ) {}
 
   async findAll(): Promise<Profile[]> {
     try {
-      const profiles = await this.repositryProfile.find({
-        join: {
-          alias: 'profile',
-          innerJoinAndSelect: {
-            country: 'profile.country',
-            gender: 'profile.gender',
-            sentimental: 'profile.sentimental',
-            typeAcount: 'profile.typeAcount',
-            user: 'profile.user',
-          },
-        },
+      const profiles = await this.repositoryProfile.find({
+        relations: ['country', 'gender', 'sentimental', 'typeAcount'],
       });
 
       if (!profiles.length) {
@@ -39,9 +30,7 @@ export class ProfileService {
       return profiles;
     } catch (error) {
       throw new HttpException(
-        {
-          message: 'Hubo un error al intentar encontrar los profiles',
-        },
+        { message: 'hubo un error al intentar encontrar el profile' },
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -49,7 +38,7 @@ export class ProfileService {
 
   async findOne(id: number): Promise<any> {
     try {
-      const profile = await this.repositryProfile.findOne({
+      const profile = await this.repositoryProfile.findOne({
         where: { profile_id: id },
         relations: ['country', 'gender', 'user', 'sentimental', 'typeAcount'],
       });
@@ -74,7 +63,7 @@ export class ProfileService {
 
   async update(id: number, updateProfileDto: UpdateProfileDto): Promise<any> {
     try {
-      const profile = await this.repositryProfile.findOne({
+      const profile = await this.repositoryProfile.findOne({
         where: { profile_id: id },
       });
       if (!profile) {
@@ -86,7 +75,7 @@ export class ProfileService {
         );
       }
       const updatedUser = Object.assign(profile, updateProfileDto);
-      await this.repositryProfile.save(updatedUser);
+      await this.repositoryProfile.save(updatedUser);
       return {
         message: `El profile con #ID ${id} ha sido actualizado`,
         user: updatedUser,
@@ -103,7 +92,7 @@ export class ProfileService {
 
   async remove(id: number): Promise<any> {
     try {
-      const profile = await this.repositryProfile.findOne({
+      const profile = await this.repositoryProfile.findOne({
         where: { profile_id: id },
       });
       if (!profile) {
@@ -112,7 +101,7 @@ export class ProfileService {
           status: HttpStatus.CONFLICT,
         };
       }
-      await this.repositryProfile.remove(profile);
+      await this.repositoryProfile.remove(profile);
       return {
         message: `El profile con #ID ${id} ha sido eliminado`,
         status: HttpStatus.NO_CONTENT,
