@@ -9,17 +9,27 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { CreateUserInterface } from '../users/interface/create.user.interface';
 import LoginResponse from '../auth/auth.interface';
+import { Profile } from 'src/profile/entities/profile.entity';
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    @InjectRepository(Profile)
+    private repositryProfile: Repository<Profile>,
     private jwtServie: JwtService,
     private configService: ConfigService,
   ) {}
 
   async createUser(userObject: RegisterAuthDto): Promise<CreateUserInterface> {
-    const { password, email } = userObject;
+    const {
+      password,
+      email,
+      country_id,
+      gender_id,
+      sentimental_id,
+      typeAcount_id,
+    } = userObject;
     const plainPass = await hash(password, 10);
 
     const usuarioEncriptado = { ...userObject, password: plainPass };
@@ -28,6 +38,13 @@ export class AuthService {
 
     if (!findUser) {
       const user = await this.usersRepository.save(usuarioEncriptado);
+      console.log(user);
+
+      const profile = await this.repositryProfile.save(user);
+      console.log(
+        '🚀 ~ file: auth.service.ts:55 ~ AuthService ~ createUser ~ profile',
+        profile,
+      );
 
       throw new HttpException(
         {

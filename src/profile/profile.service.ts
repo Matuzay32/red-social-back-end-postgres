@@ -11,34 +11,6 @@ export class ProfileService {
   constructor(
     @InjectRepository(Profile) private repositryProfile: Repository<Profile>,
   ) {}
-  async create(createProfileDto: CreateProfileDto): Promise<any> {
-    const { user_id } = createProfileDto;
-    try {
-      const found = await this.repositryProfile.findOne({
-        where: { user_id },
-      });
-      if (found) {
-        return {
-          message: `El profile ${user_id} ya se encuentra en la DB`,
-          status: HttpStatus.UNPROCESSABLE_ENTITY,
-          data: found,
-        };
-      }
-
-      await this.repositryProfile.save(createProfileDto);
-      return {
-        message: `El profile ${user_id} fue creado exitosamente`,
-        status: HttpStatus.CREATED,
-      };
-    } catch (error) {
-      throw new HttpException(
-        {
-          message: `Ocurrió un error al intentar crear el profile con # ${user_id}`,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
 
   async findAll(): Promise<Profile[]> {
     try {

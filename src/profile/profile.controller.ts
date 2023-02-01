@@ -16,10 +16,6 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
-  @Post()
-  create(@Body() createProfileDto: CreateProfileDto) {
-    return this.profileService.create(createProfileDto);
-  }
 
   @Get()
   findAll() {
