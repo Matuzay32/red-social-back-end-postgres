@@ -79,6 +79,7 @@ export class ProfileService {
     try {
       const profile = await this.repositryProfile.findOne({
         where: { profile_id: id },
+        relations: ['country', 'gender', 'user', 'sentimental', 'typeAcount'],
       });
       if (!profile) {
         throw new HttpException(
