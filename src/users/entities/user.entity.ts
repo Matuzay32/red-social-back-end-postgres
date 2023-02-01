@@ -20,6 +20,9 @@ export class User {
   @Column()
   name: string;
 
+  @Column()
+  birthday: Date;
+
   @Column({ default: false })
   isActive: boolean;
 

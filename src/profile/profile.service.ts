@@ -14,15 +14,42 @@ export class ProfileService {
 
   async findAll(): Promise<Profile[]> {
     try {
-      const profiles = await this.repositoryProfile.find({
-        relations: ['country', 'gender', 'sentimental', 'typeAcount'],
-      });
+      const profiles = await this.repositoryProfile
+        .createQueryBuilder('profile')
+        .leftJoinAndSelect('profile.user', 'user')
+        .leftJoinAndSelect('profile.country', 'country')
+        .leftJoinAndSelect('profile.gender', 'gender')
+        .leftJoinAndSelect('profile.sentimental', 'sentimental')
+        .leftJoinAndSelect('profile.typeAcount', 'typeAcount')
+        .select([
+          'profile.profile_id',
+          'profile.country_id',
+          'profile.gender_id',
+          'profile.user_id',
+          'profile.sentimental_id',
+          'profile.typeAcount_id',
+          'user.user_id',
+          'user.username',
+          'user.email',
+          'user.lastName',
+          'user.name',
+          'user.birthday',
+          'user.isActive',
+          'user.isAdmin',
+          'country.country_id',
+          'country.name',
+          'gender.gander_id',
+          'gender.name',
+          'sentimental.sentimental_id',
+          'sentimental.name',
+          'typeAcount.typeAcount_id',
+          'typeAcount.name',
+        ])
+        .getMany();
 
       if (!profiles.length) {
         throw new HttpException(
-          {
-            message: 'No hay profiles en la base de datos',
-          },
+          { message: 'No hay profiles en la base de datos' },
           HttpStatus.NO_CONTENT,
         );
       }
@@ -30,18 +57,47 @@ export class ProfileService {
       return profiles;
     } catch (error) {
       throw new HttpException(
-        { message: 'hubo un error al intentar encontrar el profile' },
+        { message: 'Hubo un error al intentar encontrar los profiles' },
         HttpStatus.BAD_REQUEST,
       );
     }
   }
-
   async findOne(id: number): Promise<any> {
     try {
-      const profile = await this.repositoryProfile.findOne({
-        where: { profile_id: id },
-        relations: ['country', 'gender', 'user', 'sentimental', 'typeAcount'],
-      });
+      const profile = await this.repositoryProfile
+        .createQueryBuilder('profile')
+        .where('profile.profile_id =:id', { id })
+        .leftJoinAndSelect('profile.country', 'country')
+        .leftJoinAndSelect('profile.gender', 'gender')
+        .leftJoinAndSelect('profile.user', 'user')
+        .leftJoinAndSelect('profile.sentimental', 'sentimental')
+        .leftJoinAndSelect('profile.typeAcount', 'typeAcount')
+        .select([
+          'profile.profile_id',
+          'profile.country_id',
+          'profile.gender_id',
+          'profile.user_id',
+          'profile.sentimental_id',
+          'profile.typeAcount_id',
+          'user.user_id',
+          'user.username',
+          'user.email',
+          'user.lastName',
+          'user.name',
+          'user.birthday',
+          'user.isActive',
+          'user.isAdmin',
+          'country.country_id',
+          'country.name',
+          'gender.gander_id',
+          'gender.name',
+          'sentimental.sentimental_id',
+          'sentimental.name',
+          'typeAcount.typeAcount_id',
+          'typeAcount.name',
+        ])
+        .getOne();
+
       if (!profile) {
         throw new HttpException(
           {

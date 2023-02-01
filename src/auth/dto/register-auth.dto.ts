@@ -38,4 +38,7 @@ export class RegisterAuthDto extends PartialType(LoginAuthDto) {
 
   @ApiProperty()
   typeAcount_id: number;
+
+  @ApiProperty()
+  birthday: Date;
 }
