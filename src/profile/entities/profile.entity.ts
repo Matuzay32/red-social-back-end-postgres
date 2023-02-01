@@ -31,23 +31,23 @@ export class Profile {
   @Column()
   typeAcount_id: number;
 
-  @ManyToOne((type) => Country)
+  @ManyToOne((type) => Country, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'country_id' })
   country: Country;
 
-  @ManyToOne((type) => Gender)
+  @ManyToOne((type) => Gender, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'gender_id' })
   gender: Gender;
 
-  @ManyToOne((type) => Sentimental)
+  @ManyToOne((type) => Sentimental, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'sentimental_id' })
   sentimental: Sentimental;
 
-  @ManyToOne((type) => TypeAcount)
+  @ManyToOne((type) => TypeAcount, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'typeAcount_id' })
   typeAcount: TypeAcount;
 
-  @ManyToOne((type) => User)
+  @ManyToOne((type) => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 }

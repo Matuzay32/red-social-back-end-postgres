@@ -41,10 +41,6 @@ export class AuthService {
       console.log(user);
 
       const profile = await this.repositryProfile.save(user);
-      console.log(
-        '🚀 ~ file: auth.service.ts:55 ~ AuthService ~ createUser ~ profile',
-        profile,
-      );
 
       throw new HttpException(
         {
