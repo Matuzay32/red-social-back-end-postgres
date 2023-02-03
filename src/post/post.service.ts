@@ -28,12 +28,10 @@ export class PostService {
 
       const post = await this.repositoryPost.save(createPostDto);
 
-      if (post) {
-        return {
-          message: `La publicacion fue creada exitosamente`,
-          status: HttpStatus.CREATED,
-        };
-      }
+      return {
+        message: `La publicacion fue creada exitosamente`,
+        status: HttpStatus.CREATED,
+      };
     } catch (error) {
       throw new HttpException(
         {
