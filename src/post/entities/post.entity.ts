@@ -3,7 +3,7 @@ import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 export class Post {
   @PrimaryGeneratedColumn()
-  post_id_: number;
+  post_id: number;
 
   @ManyToOne((type) => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })

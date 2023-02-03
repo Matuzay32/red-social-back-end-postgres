@@ -10,6 +10,7 @@ export class GenderService {
   constructor(
     @InjectRepository(Gender) private repositryGender: Repository<Gender>,
   ) {}
+
   async create(createGenderDto: CreateGenderDto): Promise<any> {
     const { name } = createGenderDto;
     try {

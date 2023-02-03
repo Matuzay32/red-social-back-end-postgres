@@ -56,7 +56,7 @@ export class HeartService {
     } catch (error) {
       throw new HttpException(
         {
-          message: 'Hubo un error al intentar encontrar los me gusta',
+          message: 'Hubo un error al intentar encontrar los me gustapos',
         },
         HttpStatus.BAD_REQUEST,
       );
