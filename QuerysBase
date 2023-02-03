@@ -1,0 +1,28 @@
+INSERT INTO country(name)
+VALUES
+('Argentina'),
+('Brazil'),
+('Alemania'),
+('Portugal'),
+('Francia'),
+('Japon'),
+('Inglaterra'),
+('Estados Unidos');
+
+INSERT INTO gender(name)
+VALUES
+('Masuculino'),
+('Femenino');
+
+INSERT INTO type_acount(name)
+VALUES
+('Priavado'),
+('Publico');
+
+INSERT INTO sentimental(name)
+VALUES
+('Casado/a'),
+('Soltero/a'),
+('Viudo/a');
+
+

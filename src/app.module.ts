@@ -18,6 +18,8 @@ import { FriendModule } from './friend/friend.module';
 import { ProfileModule } from './profile/profile.module';
 import { Friend } from './friend/entities/friend.entity';
 import { Profile } from './profile/entities/profile.entity';
+import { HeartModule } from './heart/heart.module';
+import { Heart } from './heart/entities/heart.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: false, isGlobal: true }),
@@ -38,6 +40,7 @@ import { Profile } from './profile/entities/profile.entity';
         TypeAcount,
         Friend,
         Profile,
+        Heart,
       ],
       synchronize: true,
     }),
@@ -47,6 +50,7 @@ import { Profile } from './profile/entities/profile.entity';
     TypeAcountModule,
     FriendModule,
     ProfileModule,
+    HeartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
