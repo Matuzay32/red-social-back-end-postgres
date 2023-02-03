@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate } from 'class-validator';
 
-export class CreatePostDto {
+export class CreatePublicationDto {
   @ApiProperty()
   user_id: number;
 

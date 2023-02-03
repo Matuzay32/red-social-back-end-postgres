@@ -1,7 +1,7 @@
 import { User } from 'src/users/entities/user.entity';
 import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Post {
+export class Publication {
   @PrimaryGeneratedColumn()
   post_id: number;
 

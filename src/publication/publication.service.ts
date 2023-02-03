@@ -1,17 +1,18 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Post } from './entities/post.entity';
 import { Repository } from 'typeorm';
+import { CreatePublicationDto } from './dto/create-publication.dto';
+import { UpdatePublicationDto } from './dto/update-publication.dto';
+import { Publication } from './entities/publication.entity';
 
 @Injectable()
-export class PostService {
+export class PublicationService {
   constructor(
-    @InjectRepository(Post) private repositoryPost: Repository<Post>,
+    @InjectRepository(Publication)
+    private repositoryPost: Repository<Publication>,
   ) {}
 
-  async create(createPostDto: CreatePostDto): Promise<any> {
+  async create(createPostDto: CreatePublicationDto): Promise<any> {
     const { user_id, text, media, updatedAt } = createPostDto;
 
     try {
@@ -90,7 +91,7 @@ export class PostService {
     }
   }
 
-  async update(id: number, updatePostDto: UpdatePostDto): Promise<any> {
+  async update(id: number, updatePostDto: UpdatePublicationDto): Promise<any> {
     try {
       const post = await this.repositoryPost.findOne({
         where: { post_id: id },

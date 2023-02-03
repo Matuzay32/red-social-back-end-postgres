@@ -20,8 +20,8 @@ import { Friend } from './friend/entities/friend.entity';
 import { Profile } from './profile/entities/profile.entity';
 import { HeartModule } from './heart/heart.module';
 import { Heart } from './heart/entities/heart.entity';
-import { PostModule } from './post/post.module';
-import { Post } from './post/entities/post.entity';
+import { PublicationModule } from './publication/publication.module';
+import { Publication } from './publication/entities/publication.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ ignoreEnvFile: false, isGlobal: true }),
@@ -43,7 +43,7 @@ import { Post } from './post/entities/post.entity';
         Friend,
         Profile,
         Heart,
-        Post,
+        Publication,
       ],
       synchronize: true,
     }),
@@ -54,7 +54,7 @@ import { Post } from './post/entities/post.entity';
     FriendModule,
     ProfileModule,
     HeartModule,
-    PostModule,
+    PublicationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
